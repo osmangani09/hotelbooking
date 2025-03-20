@@ -35,13 +35,13 @@ public class ReservationControllerTest {
 
     @Test
     public void getApiFailureTest() throws Exception {
-        this.mockMvc.perform(get("http://localhost:8080/booking/ef07c50c-61ff-494b-937a-a01e60a082e")).andDo(print()).andExpect(status().isNotFound());
+        this.mockMvc.perform(get("http://0.0.0.0:8080/booking/ef07c50c-61ff-494b-937a-a01e60a082e")).andDo(print()).andExpect(status().isNotFound());
     }
 
     @Test
     public void getApiSuccessTest() throws Exception {
         List<Reservation> reservationList =   reservationRepository.findAll();
-        this.mockMvc.perform(get("http://localhost:8080/booking/".concat(String.valueOf(reservationList.get(1).getReservationId())))).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(get("http://0.0.0.0:8080/booking/".concat(String.valueOf(reservationList.get(1).getReservationId())))).andDo(print()).andExpect(status().isOk());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ReservationControllerTest {
                 .put("endDate", "2023-01-21");
 
         // Perform a POST request to the API
-        mockMvc.perform(post("http://localhost:8080/booking")
+        mockMvc.perform(post("http://0.0.0.0:8080/booking")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonNode.toString()))
                 .andExpect(status().isOk()).andDo(print());
@@ -74,7 +74,7 @@ public class ReservationControllerTest {
                 .put("endDate", "2023-01-23");
 
         // Perform a POST request to the API
-        mockMvc.perform(post("http://localhost:8080/booking")
+        mockMvc.perform(post("http://0.0.0.0:8080/booking")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonNode.toString()))
                 .andExpect(status().isOk()).andDo(print());
@@ -89,7 +89,7 @@ public class ReservationControllerTest {
                 .put("endDate", "2023-01-23");
 
         // Perform a POST request to the API
-        mockMvc.perform(post("http://localhost:8080/booking")
+        mockMvc.perform(post("http://0.0.0.0:8080/booking")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonNode.toString()))
                 .andExpect(status().isBadRequest()).andDo(print());
@@ -109,12 +109,12 @@ public class ReservationControllerTest {
                 .put("endDate", "2023-01-24");
 
         // Perform a POST request to the API
-        mockMvc.perform(post("http://localhost:8080/booking")
+        mockMvc.perform(post("http://0.0.0.0:8080/booking")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonNode.toString()))
                 .andExpect(status().isOk()).andDo(print());
         List<Reservation> reservationList =   reservationRepository.findAll();
-        mockMvc.perform(put("http://localhost:8080/booking/".concat(String.valueOf(reservationList.get(1).getReservationId()))))
+        mockMvc.perform(put("http://0.0.0.0:8080/booking/".concat(String.valueOf(reservationList.get(1).getReservationId()))))
                 .andExpect(status().isOk()).andDo(print());
     }
 
